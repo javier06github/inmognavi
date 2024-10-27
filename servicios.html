@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Inmobiliaria Gnavi</title>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome para íconos de redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md fixed w-full z-10">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Inmobiliaria Gnavi
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Inicio</a>
+                <a href="propiedades.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Propiedades</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Servicios</a>
+                <a href="contacto.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Contacto</a>
+                <a href="quierovender.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Quiero vender mi propiedad</a>
+            </div>
+            <button id="menu-toggle" class="md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <!-- Menú hamburguesa -->
+            <div id="menu" class="hidden absolute top-16 left-0 w-full bg-white shadow-lg z-20">
+                <ul class="flex flex-col items-center">
+                    <li class="py-3"><a href="index.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Inicio</a></li>
+                    <li class="py-3"><a href="propiedades.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Propiedades</a></li>
+                    <li class="py-3"><a href="servicios.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Servicios</a></li>
+                    <li class="py-3"><a href="contacto.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Contacto</a></li>
+                    <li class="py-3"><a href="quierovender.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Quiero vender mi propiedad</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-36"> <!-- Ajustamos el padding top para evitar superposición -->
+        <!-- Sección de Servicios con Imagen de Fondo -->
+        <section class="bg-cover bg-center bg-fixed py-24" >
+            <div class="container mx-auto px-6 py-16 bg-gray-800 bg-opacity-75 rounded-lg">
+                <h1 class="text-5xl font-bold text-center text-white mb-12">Nuestros Servicios</h1>
+
+                <!-- Módulos de Servicios, uno sobre otro -->
+                <div class="space-y-12">
+
+                    <!-- Servicio: Vender tu Propiedad -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-home fa-3x text-blue-600"></i>
+                            <h2 class="text-4xl font-bold">Servicios para Vender tu Propiedad</h2>
+                        </div>
+                        <p class="text-gray-600 mt-4">
+                            En Inmobiliaria Gnavi, te ayudamos a vender tu propiedad rápidamente gracias a nuestra gran lista de compradores que siempre están en busca de nuevas oportunidades. Con muchos años de experiencia y una presencia sólida en el mercado inmobiliario, somos conocidos por nuestra confianza y prestigio, siendo referentes en la zona de Moquehuá, Chivilcoy, y áreas aledañas. Nuestro equipo experto se encargará de todo, asegurando que tu propiedad sea presentada de la mejor manera posible.
+                        </p>
+                    </div>
+
+                    <!-- Servicio: Servicios al Comprador -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-handshake fa-3x text-green-600"></i>
+                            <h2 class="text-4xl font-bold">Servicios al Comprador</h2>
+                        </div>
+                        <p class="text-gray-600 mt-4">
+                            Como compradores, puedes confiar en que las propiedades ofrecidas por Inmobiliaria Gnavi han sido cuidadosamente evaluadas por nuestros especialistas. Nos enorgullece ofrecer las mejores propiedades en venta en Moquehuá, Chivilcoy y las zonas circundantes. Brindamos total confianza a nuestros clientes, acompañándolos en todo el proceso de compra y ofreciendo el respaldo que caracteriza a nuestra inmobiliaria. Desde la selección hasta la adquisición, estamos contigo en cada paso para garantizar una compra segura y satisfactoria.
+                        </p>
+                    </div>
+
+                    <!-- Servicio: Gestión de Trámites -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 transform hover:scale-105 transition duration-300 ease-in-out">
+                        <div class="flex items-center space-x-4">
+                            <i class="fas fa-gavel fa-3x text-red-600"></i>
+                            <h2 class="text-4xl font-bold">Gestión de Trámites</h2>
+                        </div>
+                        <p class="text-gray-600 mt-4">
+                            Nuestra inmobiliaria se asocia con abogados de confianza para ofrecerte una gestión completa de trámites. Ya sea que estés comprando o vendiendo una propiedad, nuestro equipo legal se encargará de todos los aspectos necesarios para asegurar que la transacción se realice de manera eficiente y sin problemas. La gestión de trámites es un aspecto crucial de nuestro servicio, y nos aseguramos de que cada cliente esté completamente respaldado en todo momento, ofreciendo tranquilidad y seguridad en cada paso del proceso.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-between">
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h4 class="text-2xl font-bold mb-4">Inmobiliaria Gnavi</h4>
+                    <p>Tu socio confiable en bienes raíces</p>
+                </div>
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h5 class="text-lg font-semibold mb-4">Enlaces Rápidos</h5>
+                    <ul>
+                        <li><a href="index.html" class="hover:text-blue-400 transition duration-300">Inicio</a></li>
+                        <li><a href="propiedades.html" class="hover:text-blue-400 transition duration-300">Propiedades</a></li>
+                        <li><a href="servicios.html" class="hover:text-blue-400 transition duration-300">Servicios</a></li>
+                        <li><a href="contacto.html" class="hover:text-blue-400 transition duration-300">Contacto</a></li>
+                        <li><a href="quierovender.html" class="hover:text-blue-400 transition duration-300">Quiero vender mi propiedad</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h5 class="text-lg font-semibold mb-4">Contáctanos</h5>
+                    <p>info@inmobiliariagnavi.com</p>
+                    <p>+1 234 567 890</p>
+                    <p>Calle Falsa 123, Ciudad, País</p>
+                </div>
+                <div class="w-full md:w-1/4">
+                    <h5 class="text-lg font-semibold mb-4">Síguenos</h5>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-twitter fa-lg"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-linkedin-in fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2024 Inmobiliaria Gnavi. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const menuButton = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('menu');
+
+        menuButton.addEventListener('click', function() {
+            navMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>

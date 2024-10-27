@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmobiliaria Gnavi - Tu Hogar Ideal</title>
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Swiper CSS para el carrusel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- Font Awesome para íconos de redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md fixed w-full z-10">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="logo">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 22V12h6v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Inmobiliaria Gnavi
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Inicio</a>
+                <a href="propiedades.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Propiedades</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Servicios</a>
+                <a href="contacto.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Contacto</a>
+                <a href="quierovender.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Quiero vender mi propiedad</a>
+            </div>
+            <button class="md:hidden" id="menu-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <!-- Menú hamburguesa -->
+            <div class="hidden md:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-20" id="menu">
+                <ul class="flex flex-col items-center">
+                    <li class="py-3"><a href="index.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Inicio</a></li>
+                    <li class="py-3"><a href="propiedades.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Propiedades</a></li>
+                    <li class="py-3"><a href="servicios.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Servicios</a></li>
+                    <li class="py-3"><a href="contacto.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Contacto</a></li>
+                    <li class="py-3"><a href="quierovender.html" class="text-gray-600 hover:text-gray-900 transition duration-300">Quiero vender mi propiedad</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section id="hero-index" class="flex items-center py-10 bg-gray-800">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="glass-card max-w-3xl p-8">
+                    <h1 class="text-5xl font-bold text-white mb-4">Encuentra tu hogar ideal</h1>
+                    <p class="text-xl text-white mb-8">Descubre las mejores propiedades con Inmobiliaria Gnavi</p>
+                    <!-- Formulario de Búsqueda -->
+                    <form class="flex flex-wrap gap-4" id="buscador">
+                        <select name="ubicacion" id="ubicacionSelect" class="p-3 rounded-lg" required>
+                            <option value="">Selecciona una ubicación</option>
+                        </select>
+                        <select name="tipo" class="p-3 rounded-lg" required>
+                            <option value="">Tipo de propiedad</option>
+                            <option value="Casa">Casa</option>
+                            <option value="Departamento">Departamento</option>
+                            <option value="Oficina">Oficina</option>
+                            <option value="Lote">Lote</option>
+                        </select>
+                        <button type="submit" class="btn bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Propiedades Destacadas -->
+        <!-- Propiedades Destacadas -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Propiedades Destacadas</h2>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <script src="propiedades.js"></script>
+                        <script>
+                            const propiedadesContainer = document.querySelector('.swiper-wrapper');
+                            propiedades.slice(0, 5).forEach(propiedad => {
+                                const card = `
+                                    <div class="swiper-slide property-card bg-white rounded-lg shadow-lg overflow-hidden" data-ubicacion="${propiedad.ubicacion}" data-tipo="${propiedad.tipo}" data-precio="${propiedad.precio}">
+                                        <img src="${propiedad.imagen}" alt="${propiedad.titulo}" class="w-full h-auto object-cover">
+                                        <div class="p-6">
+                                            <h3 class="text-xl font-semibold mb-2">${propiedad.titulo}</h3>
+                                            <p class="text-gray-600 mb-4">${propiedad.descripcion}</p>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-2xl font-bold text-blue-600">$${propiedad.precio.toLocaleString()}</span>
+                                                <a href="detallepropiedad.html?id=${propiedad.id}" class="btn bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Ver Detalles</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                                propiedadesContainer.innerHTML += card;
+                            });
+                        </script>
+                    </div>
+                    <!-- Controles del carrusel -->
+                    <div class="swiper-button-next hidden md:block"></div>
+                    <div class="swiper-button-prev hidden md:block"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-between">
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h4 class="text-2xl font-bold mb-4">Inmobiliaria Gnavi</h4>
+                    <p>Tu socio confiable en bienes raíces</p>
+                </div>
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h5 class="text-lg font-semibold mb-4">Enlaces Rápidos</h5>
+                    <ul>
+                        <li><a href="index.html" class="hover:text-blue-400 transition duration-300">Inicio</a></li>
+                        <li><a href="propiedades.html" class="hover:text-blue-400 transition duration-300">Propiedades</a></li>
+                        <li><a href="servicios.html" class="hover:text-blue-400 transition duration-300">Servicios</a></li>
+                        <li><a href="contacto.html" class="hover:text-blue-400 transition duration-300">Contacto</a></li>
+                        <li><a href="quierovender.html" class="hover:text-blue-400 transition duration-300">Quiero vender mi propiedad</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/4 mb-6 md:mb-0">
+                    <h5 class="text-lg font-semibold mb-4">Contáctanos</h5>
+                    <p>adriangnavi23@hotmail.com</p>
+                    <p>02346 65-4156</p>
+                    <p>25 de mayo 162, Chivilcoy, Argentina</p>
+                </div>
+                <div class="w-full md:w-1/4">
+                    <h5 class="text-lg font-semibold mb-4">Síguenos</h5>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-twitter fa-lg"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="#" class="hover:text-blue-400 transition duration-300">
+                            <i class="fab fa-linkedin-in fa-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>&copy; 2024 Inmobiliaria Gnavi. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Swiper Initialization -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3, /* Más propiedades visibles en pantallas grandes */
+                    spaceBetween: 30,
+                }
+            },
+            // Ajustar el comportamiento de deslizamiento en pantallas pequeñas
+            simulateTouch: true,
+            touchRatio: 1,
+            touchReleaseOnEdges: true,
+        });
+        // Menú hamburguesa toggle
+        const menuButton = document.querySelector('button#menu-toggle');
+        const navMenu = document.querySelector('div#menu');
+
+        menuButton.addEventListener('click', function() {
+            navMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- Funcionalidad JavaScript para el Buscador -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ubicacionSelect = document.getElementById('ubicacionSelect');
+            const propiedades = document.querySelectorAll('.property-card');
+            const ubicaciones = new Set();
+
+            propiedades.forEach(propiedad => {
+                const ubicacion = propiedad.getAttribute('data-ubicacion');
+                ubicaciones.add(ubicacion);
+            });
+
+            ubicaciones.forEach(ubicacion => {
+                const option = document.createElement('option');
+                option.value = ubicacion;
+                option.textContent = ubicacion;
+                ubicacionSelect.appendChild(option);
+            });
+        });
+
+        document.getElementById('buscador').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const ubicacion = event.target.ubicacion.value.toLowerCase();
+            const tipo = event.target.tipo.value.toLowerCase();
+
+            const propiedades = document.querySelectorAll('.property-card');
+
+            propiedades.forEach(propiedad => {
+                const propiedadUbicacion = propiedad.getAttribute('data-ubicacion').toLowerCase();
+                const propiedadTipo = propiedad.getAttribute('data-tipo').toLowerCase();
+
+                const matchesUbicacion = propiedadUbicacion.includes(ubicacion);
+                const matchesTipo = tipo === "" || propiedadTipo === tipo;
+
+                if (matchesUbicacion && matchesTipo) {
+                    propiedad.style.display = 'block';
+                } else {
+                    propiedad.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    
+        <!-- Botón de WhatsApp flotante -->
+     <!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/5491134268335?text=Hola%20Inmobiliaria!%20Quiero%20consultar%20por%20una%20propiedad" target="_blank" class="whatsapp-float" title="Envíanos un mensaje por WhatsApp">
+        <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="WhatsApp Icon">
+    </a>
+    
+    
+</body>
+</html>
