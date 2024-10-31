@@ -27,20 +27,10 @@
     background-color: #22b35a;
 }
 
-
 :root {
     --primary-color: #3498db;
     --secondary-color: #2c3e50;
     --accent-color: #e74c3c;
-}
-
-/* Centrar las propiedades cuando hay pocas */
-#listaPropiedades {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centrar las propiedades horizontalmente */
-    align-items: center; /* Alinear las propiedades verticalmente si es necesario */
-    gap: 1.5rem; /* Añadir espacio entre las propiedades */
 }
 
 body {
@@ -55,16 +45,75 @@ body {
     object-fit: cover;
 }
 
-/* Ajustes en pantallas grandes */
-@media (min-width: 1024px) {
-    .property-card img {
-        max-width: 100%; /* Mantener el ancho al 100% */
-        max-height: 180px; /* Ajustar una altura máxima para que las imágenes sean más pequeñas en pantallas grandes */
+/* Estilos para el contenedor de propiedades */
+#listaPropiedades {
+    gap: 1.5rem; /* Añadir espacio entre las propiedades */
+}
+
+/* En pantallas pequeñas, usamos flexbox para crear un carrusel horizontal */
+@media (max-width: 768px) {
+    #listaPropiedades {
+        display: flex;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS */
+    }
+
+    #listaPropiedades::-webkit-scrollbar {
+        display: none; /* Ocultar la barra de desplazamiento en WebKit */
     }
 
     .property-card {
-        max-width: 400px; /* Ajustar el ancho máximo de las tarjetas */
-        margin: auto; /* Centrar las tarjetas */
+        min-width: 80%; /* Ajusta el ancho según tus necesidades */
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+    }
+
+    /* Ajustar el header en pantallas pequeñas */
+    header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    /* Ajustar el contenedor del hero */
+    .glass-card {
+        padding: 2rem;
+        text-align: center;
+    }
+
+    /* Ajustar el tamaño del buscador en pantallas pequeñas */
+    #buscador select {
+        width: 100%;
+    }
+}
+
+/* En pantallas medianas y grandes, mantenemos el grid */
+@media (min-width: 769px) {
+    #listaPropiedades {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .property-card {
+        min-width: auto;
+        flex: initial;
+        scroll-snap-align: initial;
+    }
+
+    .property-card img {
+        max-width: 100%;
+        max-height: 180px;
+    }
+
+    .property-card {
+        max-width: 400px;
+        margin: auto;
     }
 }
 
@@ -76,28 +125,9 @@ body {
     color: var(--secondary-color);
 }
 
-/* Solo aplica la clase 'hero' para la página index.html */
-#hero-index {
-    background-image: url('/api/placeholder/1200/600');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    padding: 5rem 0;
-}
-
-/* Ajustes generales para el menú hamburguesa y navegación */
-nav {
-    width: 100%; /* Asegura que el nav ocupe todo el ancho de la pantalla */
-    z-index: 1000;
-}
-
-button.md\\:hidden {
-    display: inline-block; /* Asegura que el botón hamburguesa sea visible en pantallas pequeñas */
-}
-
 /* Estilo para el menú hamburguesa desplegable */
-.md\\:hidden {
-    display: none;
+button.md\\:hidden {
+    display: inline-block;
 }
 
 @media (max-width: 768px) {
@@ -116,20 +146,12 @@ button.md\\:hidden {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 64px; /* Justo debajo del header */
+        top: 64px;
         left: 0;
         right: 0;
         background-color: white;
         padding: 1rem;
-        z-index: 1000; /* Asegura que quede sobre el contenido */
-    }
-
-    /* Ajuste del header en pantallas pequeñas */
-    header {
-        width: 100%; /* Asegura que el header ocupe todo el ancho de la pantalla */
-        position: fixed;
-        top: 0;
-        left: 0;
+        z-index: 1000;
     }
 
     /* Ajuste de los enlaces del menú hamburguesa */
@@ -142,31 +164,7 @@ button.md\\:hidden {
 
     /* Hero se ajusta para que el menú desplegable no interfiera */
     #hero-index {
-        padding-top: 13rem; /* Aumenta el padding para que el menú tenga espacio al desplegarse */
-    }
-
-    /* Ajustar el contenedor del hero */
-    .glass-card {
-        padding: 2rem;
-        text-align: center;
-    }
-
-    /* Ajustar el tamaño del buscador en pantallas pequeñas */
-    #buscador select {
-        width: 100%;
-    }
-
-    /* Hacer que las propiedades se muevan suavemente con el dedo en móviles */
-    .swiper-container {
-        overflow: hidden;
-    }
-
-    .swiper-wrapper {
-        display: flex;
-        overflow-x: auto;
-        scroll-behavior: smooth; /* Añadir desplazamiento suave */
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS */
+        padding-top: 13rem;
     }
 }
 
@@ -186,8 +184,6 @@ button.md\\:hidden {
 .property-card {
     transition: all 0.3s ease-in-out;
     overflow: hidden;
-    min-width: 300px;
-    flex: 0 0 auto;
 }
 
 .property-card:hover {
@@ -201,22 +197,6 @@ button.md\\:hidden {
 
 .property-card:hover img {
     transform: scale(1.1);
-}
-
-.property-carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-    padding-bottom: 1rem;
-    scroll-snap-type: x mandatory;
-}
-
-.property-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.property-card {
-    scroll-snap-align: start;
 }
 
 .btn {
@@ -281,4 +261,3 @@ footer .fa-instagram:hover {
 footer .fa-linkedin-in:hover {
     color: #0e76a8;
 }
-

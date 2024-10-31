@@ -77,32 +77,12 @@
         </section>
 
         <!-- Propiedades Destacadas -->
-        <!-- Propiedades Destacadas -->
         <section class="py-16 bg-white">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-12">Propiedades Destacadas</h2>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <script src="propiedades.js"></script>
-                        <script>
-                            const propiedadesContainer = document.querySelector('.swiper-wrapper');
-                            propiedades.slice(0, 5).forEach(propiedad => {
-                                const card = `
-                                    <div class="swiper-slide property-card bg-white rounded-lg shadow-lg overflow-hidden" data-ubicacion="${propiedad.ubicacion}" data-tipo="${propiedad.tipo}" data-precio="${propiedad.precio}">
-                                        <img src="${propiedad.imagen}" alt="${propiedad.titulo}" class="w-full h-auto object-cover">
-                                        <div class="p-6">
-                                            <h3 class="text-xl font-semibold mb-2">${propiedad.titulo}</h3>
-                                            <p class="text-gray-600 mb-4">${propiedad.descripcion}</p>
-                                            <div class="flex justify-between items-center">
-                                                <span class="text-2xl font-bold text-blue-600">$${propiedad.precio.toLocaleString()}</span>
-                                                <a href="detallepropiedad.html?id=${propiedad.id}" class="btn bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Ver Detalles</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `;
-                                propiedadesContainer.innerHTML += card;
-                            });
-                        </script>
+                        <!-- Las propiedades se cargarán aquí dinámicamente -->
                     </div>
                     <!-- Controles del carrusel -->
                     <div class="swiper-button-next hidden md:block"></div>
@@ -165,47 +145,59 @@
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <!-- Swiper Initialization -->
+    <!-- Script para cargar las propiedades y inicializar Swiper -->
+    <script src="propiedades.js"></script>
     <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                768: {
-                    slidesPerView: 3, /* Más propiedades visibles en pantallas grandes */
-                    spaceBetween: 30,
-                }
-            },
-            // Ajustar el comportamiento de deslizamiento en pantallas pequeñas
-            simulateTouch: true,
-            touchRatio: 1,
-            touchReleaseOnEdges: true,
-        });
-        // Menú hamburguesa toggle
-        const menuButton = document.querySelector('button#menu-toggle');
-        const navMenu = document.querySelector('div#menu');
+        // Declarar swiper en el ámbito global
+        let swiper;
 
-        menuButton.addEventListener('click', function() {
-            navMenu.classList.toggle('hidden');
-        });
-    </script>
-
-    <!-- Funcionalidad JavaScript para el Buscador -->
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const ubicacionSelect = document.getElementById('ubicacionSelect');
-            const propiedades = document.querySelectorAll('.property-card');
-            const ubicaciones = new Set();
-
-            propiedades.forEach(propiedad => {
-                const ubicacion = propiedad.getAttribute('data-ubicacion');
-                ubicaciones.add(ubicacion);
+            // Cargar propiedades destacadas
+            const propiedadesContainer = document.querySelector('.swiper-wrapper');
+            propiedades.slice(0, 5).forEach(propiedad => {
+                const card = `
+                    <div class="swiper-slide property-card bg-white rounded-lg shadow-lg overflow-hidden" data-ubicacion="${propiedad.ubicacion}" data-tipo="${propiedad.tipo}" data-precio="${propiedad.precio}">
+                        <img src="${propiedad.imagen}" alt="${propiedad.titulo}" class="w-full h-auto object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">${propiedad.titulo}</h3>
+                            <p class="text-gray-600 mb-4">${propiedad.descripcion}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-blue-600">$${propiedad.precio.toLocaleString()}</span>
+                                <a href="detallepropiedad.html?id=${propiedad.id}" class="btn bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Ver Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                propiedadesContainer.innerHTML += card;
             });
+
+            // Inicializar Swiper después de cargar las propiedades
+            swiper = new Swiper('.swiper-container', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    }
+                },
+                simulateTouch: true,
+                touchRatio: 1,
+                touchReleaseOnEdges: true,
+            });
+
+            // Cargar opciones de ubicación en el buscador
+            const ubicacionSelect = document.getElementById('ubicacionSelect');
+            const ubicaciones = new Set(propiedades.map(propiedad => propiedad.ubicacion));
 
             ubicaciones.forEach(ubicacion => {
                 const option = document.createElement('option');
@@ -213,37 +205,73 @@
                 option.textContent = ubicacion;
                 ubicacionSelect.appendChild(option);
             });
-        });
 
-        document.getElementById('buscador').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const ubicacion = event.target.ubicacion.value.toLowerCase();
-            const tipo = event.target.tipo.value.toLowerCase();
+            // Funcionalidad JavaScript para el Buscador
+            document.getElementById('buscador').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const ubicacion = event.target.ubicacion.value;
+                const tipo = event.target.tipo.value;
 
-            const propiedades = document.querySelectorAll('.property-card');
+                // Filtrar propiedades según los criterios de búsqueda
+                const propiedadesFiltradas = propiedades.filter(propiedad => {
+                    const propiedadUbicacion = propiedad.ubicacion;
+                    const propiedadTipo = propiedad.tipo;
 
-            propiedades.forEach(propiedad => {
-                const propiedadUbicacion = propiedad.getAttribute('data-ubicacion').toLowerCase();
-                const propiedadTipo = propiedad.getAttribute('data-tipo').toLowerCase();
+                    const matchesUbicacion = ubicacion === "" || propiedadUbicacion === ubicacion;
+                    const matchesTipo = tipo === "" || propiedadTipo === tipo;
 
-                const matchesUbicacion = propiedadUbicacion.includes(ubicacion);
-                const matchesTipo = tipo === "" || propiedadTipo === tipo;
+                    return matchesUbicacion && matchesTipo;
+                });
 
-                if (matchesUbicacion && matchesTipo) {
-                    propiedad.style.display = 'block';
+                // Actualizar el carrusel con las propiedades filtradas
+                swiper.removeAllSlides();
+
+                if (propiedadesFiltradas.length === 0) {
+                    const slide = `
+                        <div class="swiper-slide">
+                            <div class="text-center py-10">
+                                <h3 class="text-2xl font-semibold mb-4">No se encontraron propiedades</h3>
+                                <p class="text-gray-600">Intenta con otros criterios de búsqueda.</p>
+                            </div>
+                        </div>
+                    `;
+                    swiper.appendSlide(slide);
                 } else {
-                    propiedad.style.display = 'none';
+                    propiedadesFiltradas.forEach(propiedad => {
+                        const slide = `
+                            <div class="swiper-slide property-card bg-white rounded-lg shadow-lg overflow-hidden" data-ubicacion="${propiedad.ubicacion}" data-tipo="${propiedad.tipo}" data-precio="${propiedad.precio}">
+                                <img src="${propiedad.imagen}" alt="${propiedad.titulo}" class="w-full h-auto object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-semibold mb-2">${propiedad.titulo}</h3>
+                                    <p class="text-gray-600 mb-4">${propiedad.descripcion}</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-2xl font-bold text-blue-600">$${propiedad.precio.toLocaleString()}</span>
+                                        <a href="detallepropiedad.html?id=${propiedad.id}" class="btn bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Ver Detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        swiper.appendSlide(slide);
+                    });
                 }
+
+                // Actualizar Swiper después de agregar las nuevas diapositivas
+                swiper.update();
+            });
+
+            // Menú hamburguesa toggle
+            const menuButton = document.querySelector('button#menu-toggle');
+            const navMenu = document.querySelector('div#menu');
+
+            menuButton.addEventListener('click', function() {
+                navMenu.classList.toggle('hidden');
             });
         });
     </script>
-    
-        <!-- Botón de WhatsApp flotante -->
-     <!-- Botón de WhatsApp flotante -->
+
+    <!-- Botón de WhatsApp flotante -->
     <a href="https://wa.me/5491134268335?text=Hola%20Inmobiliaria!%20Quiero%20consultar%20por%20una%20propiedad" target="_blank" class="whatsapp-float" title="Envíanos un mensaje por WhatsApp">
         <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" alt="WhatsApp Icon">
     </a>
-    
-    
 </body>
 </html>
