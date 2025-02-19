@@ -29,7 +29,7 @@ const propiedades = [
             "img/Casa3.png",
             "img/Captura de pantalla 2024-09-22 153326.png"
         ],
-        descripcion: "Amplia casa en zona residencial tranquila, perfecta para familias que buscan comodidad y seguridad. Sobre asfalto. Todos los servicios",
+        descripcion: "Amplia casa en zona residencial tranquila, perfecta para familias ",
         metrosCubiertos: 100,
         metrosLote: "10 x 40",
         direccion: "25 de Mayo, B6625 Buenos aires, Provincia de Buenos Aires",
